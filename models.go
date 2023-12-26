@@ -44,7 +44,7 @@ type pkbnCreateResponse struct {
 
 func (record pkbnRecord) toLibdnsRecord(zone string) libdns.Record {
 	ttl, _ := time.ParseDuration(record.TTL + "s")
-	priority, _ := strconv.Atoi(record.Prio)
+	priority, _ := strconv.ParseUint(record.Prio, 10, 64)
 	return libdns.Record{
 		ID:       record.ID,
 		Name:     libdns.RelativeName(record.Name, LibdnsZoneToPorkbunDomain(zone)),
